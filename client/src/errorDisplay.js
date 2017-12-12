@@ -3,14 +3,24 @@ var ErrorDisplay = function(errors){
 }
 
 ErrorDisplay.prototype = {
-  render: function(errors){
-    console.log('displaying errors');
-    errors.forEAch( function(error){
-    var li = document.createElement("li");
-    var p = document.createElement("p");
-    
-    });
-  }
+  render: function(errors)
+    {
+      var ul = document.getElementById("error-list");
+
+      errors.forEach( function(error){
+        var deleteBtn = document.createElement('button');
+        deleteBtn.classNane = "delete-btn";/
+        deleteBtn.innerText = "X";
+        var li = document.createElement("li");
+        li.innerText = error.description;
+        li.appendChild(deleteBtn);
+        ul.appendChild(li);
+      });
+    }
+}
+
+var buildDeleteButton = function(){
+  
 }
 
 module.exports = ErrorDisplay;

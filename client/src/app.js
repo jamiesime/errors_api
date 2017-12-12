@@ -11,7 +11,6 @@ var requestComplete = function(){
   if (this.status !== 200 ) return;
   var jsonString = this.responseText;
   var response = JSON.parse(jsonString);
-  debugger;
   showContent(response);
 }
 

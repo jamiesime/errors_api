@@ -1,3 +1,4 @@
+var ErrorDisplay = require("./errorDisplay.js");
 
 var makeRequest = function(url, callback){
   var request = new XMLHttpRequest();
@@ -10,15 +11,16 @@ var requestComplete = function(){
   if (this.status !== 200 ) return;
   var jsonString = this.responseText;
   var response = JSON.parse(jsonString);
+  debugger;
   showContent(response);
 }
 
-var showContent = function(quotes){
-  var showQuotes = new QuoteView(quotes);
+var showContent = function(errors){
+  var showErrors = new ErrorDisplay(errors);
 }
 
 var app = function(){
-  url = "/"
+  url = "http://localhost:3000/errors";
   makeRequest(url, requestComplete);
 }
 

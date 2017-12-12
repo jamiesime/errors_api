@@ -9,7 +9,7 @@ app.use(express.static('client/build'));
 var MongoClient = require("mongodb").MongoClient;
 
 
-MongoClient.connect("mongodb://localhost:27017/star_wars", function(err, database){
+MongoClient.connect("mongodb://localhost:27017/errors", function(err, database){
   if (err){
     return console.log(err);
   }
@@ -24,3 +24,21 @@ MongoClient.connect("mongodb://localhost:27017/star_wars", function(err, databas
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/client/build/index.html');
 });
+
+app.get("/errors", function(req, res){
+    db.collection("errorLogs").find().toArray(function(err, results){
+    if (err){
+      return console.log(err);
+    }
+    res.json(results);
+  });
+})
+
+app.post("/errors", function(req, res){
+  db.collection("errorLogs").save(req.body, function(err, result){
+  if (err){
+    return console.log("err");
+  }
+  res.redirect("/");
+});
+})

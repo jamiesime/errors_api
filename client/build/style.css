@@ -8,6 +8,10 @@ h1 {
   text-align: center;
 }
 
+p {
+  text-align: center;
+}
+
 form {
   display: flex;
   align-items: center;
@@ -18,15 +22,18 @@ form {
 }
 
 input {
+    margin-top: 30px;
+    margin-bottom: 30px;
   -webkit-appearance: none;
   font-size: 30px;
   font-family: 'VT323', sans-serif;
 }
 
-button {
+#log-btn {
   margin: 20px;
   -webkit-appearance: none;
   font-size: 30px;
+  width: 200px;
   font-family: 'VT323', sans-serif;
   border-radius: 0px;
 
@@ -54,13 +61,13 @@ button {
 }
 
 #error-list li {
-  margin: 0px;
   display: inline-block;
   width: 350px;
-  height: 50px;
   font-size: 20px;
   background-color: #121416;
   text-align: right;
+  padding: 10px;
+  margin-bottom: 5px;
 }
 
 #error-list li:hover {
@@ -70,4 +77,10 @@ button {
 #error-list form {
   display: inline;
   font-size: 14px;
+}
+
+#error-list form button {
+  -webkit-appearance: none;
+  font-size: 16px;
+  margin-left: 20px;
 }

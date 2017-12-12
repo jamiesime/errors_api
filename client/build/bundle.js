@@ -80,7 +80,6 @@ var requestComplete = function(){
   if (this.status !== 200 ) return;
   var jsonString = this.responseText;
   var response = JSON.parse(jsonString);
-  debugger;
   showContent(response);
 }
 
@@ -106,14 +105,30 @@ var ErrorDisplay = function(errors){
 }
 
 ErrorDisplay.prototype = {
-  render: function(errors){
-    console.log('displaying errors');
-    errors.forEAch( function(error){
-    var li = document.createElement("li");
-    var p = document.createElement("p");
-    
-    });
-  }
+  render: function(errors)
+    {
+      var ul = document.getElementById("error-list");
+
+      errors.forEach( function(error){
+        var errorID = error._id;
+        var deleteForm = buildDeleteButton(errorID);
+        var li = document.createElement("li");
+        li.innerText = error.description;
+        li.appendChild(deleteForm);
+        ul.appendChild(li);
+      });
+    }
+}
+
+var buildDeleteButton = function(errorID){
+  var delForm = document.createElement("form");
+  delForm.method = "POST";
+  delForm.action = "/delete/" + errorID;
+  var deleteBtn = document.createElement('button');
+  deleteBtn.classNane = "delete-btn";
+  deleteBtn.innerText = "X";
+  delForm.appendChild(deleteBtn);
+  return delForm;
 }
 
 module.exports = ErrorDisplay;

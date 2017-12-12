@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var path = require("path");
 var parser = require('body-parser');
+var ObjectId = require("mongodb").ObjectId;
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
 app.use(express.static('client/build'));
@@ -35,10 +36,15 @@ app.get("/errors", function(req, res){
 })
 
 app.post("/errors", function(req, res){
-  db.collection("errorLogs").save(req.body, function(err, result){
-  if (err){
-    return console.log("err");
-  }
+    db.collection("errorLogs").save(req.body, function(err, result){
+    if (err){
+      return console.log("err");
+    }
+    res.redirect("/");
+  });
+})
+
+app.post("/delete/:errorID", function(req, res){
+  db.collection("errorLogs").remove( { "_id": ObjectId(req.params.errorID) } );
   res.redirect("/");
 });
-})
